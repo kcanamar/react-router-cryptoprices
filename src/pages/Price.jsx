@@ -8,13 +8,16 @@ export default function Price() {
     const url = `https://cloud.iexapis.com/stable/crypto/${symbol}/price?token=${apiKey}`
 
     const [coin, setCoin] = useState(null)
-
+    const [goGoGo, setGoGoGo] = useState(0)
     async function getCoin() {
         const data = await fetch(url).then(res => res.json())
         setCoin(data)
     }
 
-    useEffect(() => {getCoin()}, [])
+    useEffect(() => {
+        getCoin()
+        setTimeout(() => {setGoGoGo(goGoGo + 1)}, 5000)
+    }, [goGoGo])
     
     const loaded = () => 
             <div>
